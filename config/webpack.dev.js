@@ -1,15 +1,25 @@
-import path from 'path';
+'use strict';
 
-import webpack from 'webpack';
-import HTMLWebpackPlugin from 'html-webpack-plugin';
+const path = require('path');
+
+const webpack = require('webpack');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+
+const clientBabelrc = require('./client_babelrc');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-export default {
-  devtool: 'inline-source-map',
+module.exports = {
+  /**
+   * use cheap-module-source-map in development
+   * https://github.com/facebookincubator/create-react-app/blob/c78c1fae6282d4eb0ba6b844e91e49097c0073ea/packages/react-scripts/config/webpack.config.dev.js#L39-L41
+   *
+   * devtool: 'inline-source-map',
+   */
+  devtool: 'cheap-module-source-map',
   entry: [
-    'react-hot-loader/patch',
     'webpack-hot-middleware/client',
+    'react-hot-loader/patch',
     path.resolve('./client/index.js'),
   ],
   output: {
@@ -19,7 +29,7 @@ export default {
   },
   resolve: {
     modules: [
-    // NOTE: new resolve pathes need to be above node_modules
+      // NOTE: new resolve pathes need to be above node_modules
       path.resolve('./client'),
       'node_modules',
     ],
@@ -41,8 +51,15 @@ export default {
     rules: [
       {
         test: /\.js$/,
-        use: ['babel-loader'],
-        include: path.resolve('./client'),
+        use: [
+          {
+            loader: 'babel-loader',
+            options: Object.assign({}, {
+              cacheDirectory: true,
+              babelrc: false,
+            }, clientBabelrc),
+          },
+        ],
         exclude: /node_modules/,
       },
       {

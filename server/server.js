@@ -1,3 +1,5 @@
+import 'babel-polyfill';
+
 import express from 'express';
 import http from 'http';
 import bodyParser from 'body-parser';
@@ -13,6 +15,7 @@ import connectDB from 'server/config/db';
 import configIO from 'server/socket';
 import router from 'server/router';
 import { PORT } from 'server/config/constant';
+import helmet from 'helmet';
 
 const SERVER_START = `server started on port ${PORT}`;
 console.time(SERVER_START);
@@ -33,10 +36,10 @@ if (process.env.NODE_ENV !== 'production') {
     publicPath: webpackConfig.output.publicPath,
   }));
   app.use(webpackHotMiddleware(compiler));
+
   const morgan = require('morgan');
   app.use(morgan('dev'));
 } else {
-  const helmet = require('helmet');
   app.use(helmet());
 }
 

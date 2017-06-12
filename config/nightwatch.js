@@ -1,4 +1,14 @@
-require('babel-core/register');
+'use strict';
+
+/**
+ * I do not think babel-register is needed here.
+ *
+ * To add back:
+ *
+ * yarn add --dev babel-register
+ *
+ * require('babel-register');
+ */
 
 module.exports = {
   src_folders: ['test'],

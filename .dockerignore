@@ -13,11 +13,16 @@ reports/
 docker_compose/
 data/
 
+# dot file
+.gitignore
+.gitlab-ci.yml
+.babel.json
+.DS_Store
+.idea
+.vscode
+
+# root file
 Dockerfile
 README.md
 LICENSE
 circle.yml
-.gitignore
-.gitlab-ci.yml
-.DS_Store
-.git

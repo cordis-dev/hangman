@@ -1,2 +1,14 @@
-/dist/
-/build/
+# dependencies
+node_modules/
+
+# build
+dist/
+build/
+
+# test output
+coverage/
+reports/
+
+# devlopment cache
+docker_compose/
+data/

@@ -1,14 +1,23 @@
-/node_modules/
-/dist/
-/coverage
-/reports
-docker_compose/
-/build/
+# dependencies
+node_modules/
 
-npm-debug.log
+# build
+dist/
+build/
+
+# test output
+coverage/
+reports/
+
+# devlopment cache
+docker_compose/
+data/
+
+# dot file
+.gitignore
+.gitlab-ci.yml
 .babel.json
-.v8flags.5.4.500.36.undefined.json
 .DS_Store
-.config
 .idea
 .vscode
+
